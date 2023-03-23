@@ -31,13 +31,6 @@ from os import path
 
 from setuptools import setup
 
-from piplicenses import __author__ as AUTHOR
-from piplicenses import __license__ as LICENSE
-from piplicenses import __pkgname__ as PKG_NAME
-from piplicenses import __summary__ as SUMMARY
-from piplicenses import __url__ as URL
-from piplicenses import __version__ as VERSION
-
 here = path.abspath(path.dirname(__file__))
 
 
@@ -63,16 +56,16 @@ except (IOError, ImportError):
 
 
 setup(
-    name=PKG_NAME,
-    version=VERSION,
-    description=SUMMARY,
+    name="pip-licenses",
+    version="4.1.0",
+    description="Dump the software license list of Python packages installed with pip.",
     long_description=LONG_DESC,
-    url=URL,
-    author=AUTHOR,
-    license=LICENSE,
+    url="https://github.com/raimon49/pip-licenses",
+    author="raimon",
+    license="MIT",
     entry_points={
         "console_scripts": [
-            PKG_NAME + "=piplicenses:main",
+            "pip-licenses=piplicenses:main",
         ],
     },
 )
