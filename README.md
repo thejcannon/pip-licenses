@@ -6,44 +6,44 @@ Dump the software license list of Python packages installed with pip.
 
 ## Table of Contents
 
-* [Description](#description)
-* [Installation](#installation)
-* [Usage](#usage)
-* [Command\-Line Options](#command-line-options)
-    * [Common options](#common-options)
-        * [Option: from](#option-from)
-        * [Option: order](#option-order)
-        * [Option: format](#option-format)
-            * [Markdown](#markdown)
-            * [reST](#rest)
-            * [Confluence](#confluence)
-            * [HTML](#html)
-            * [JSON](#json)
-            * [JSON LicenseFinder](#json-licensefinder)
-            * [CSV](#csv)
-            * [Plain Vertical](#plain-vertical)
-        * [Option: summary](#option-summary)
-        * [Option: output\-file](#option-output-file)
-        * [Option: ignore\-packages](#option-ignore-packages)
-        * [Option: packages](#option-packages)
-    * [Format options](#format-options)
-        * [Option: with\-system](#option-with-system)
-        * [Option: with\-authors](#option-with-authors)
-        * [Option: with\-urls](#option-with-urls)
-        * [Option: with\-description](#option-with-description)
-        * [Option: with\-license\-file](#option-with-license-file)
-        * [Option: filter\-strings](#option-filter-strings)
-        * [Option: filter\-code\-page](#option-filter-code-page)
-    * [Verify options](#verify-options)
-        * [Option: fail\-on](#option-fail-on)
-        * [Option: allow\-only](#option-allow-only)
-    * [More Information](#more-information)
-* [Dockerfile](#dockerfile)
-* [About UnicodeEncodeError](#about-unicodeencodeerror)
-* [License](#license)
-    * [Dependencies](#dependencies)
-* [Uninstallation](#uninstallation)
-* [Contributing](#contributing)
+- [Description](#description)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Command\-Line Options](#command-line-options)
+  - [Common options](#common-options)
+    - [Option: from](#option-from)
+    - [Option: order](#option-order)
+    - [Option: format](#option-format)
+      - [Markdown](#markdown)
+      - [reST](#rest)
+      - [Confluence](#confluence)
+      - [HTML](#html)
+      - [JSON](#json)
+      - [JSON LicenseFinder](#json-licensefinder)
+      - [CSV](#csv)
+      - [Plain Vertical](#plain-vertical)
+    - [Option: summary](#option-summary)
+    - [Option: output\-file](#option-output-file)
+    - [Option: ignore\-packages](#option-ignore-packages)
+    - [Option: packages](#option-packages)
+  - [Format options](#format-options)
+    - [Option: with\-system](#option-with-system)
+    - [Option: with\-authors](#option-with-authors)
+    - [Option: with\-urls](#option-with-urls)
+    - [Option: with\-description](#option-with-description)
+    - [Option: with\-license\-file](#option-with-license-file)
+    - [Option: filter\-strings](#option-filter-strings)
+    - [Option: filter\-code\-page](#option-filter-code-page)
+  - [Verify options](#verify-options)
+    - [Option: fail\-on](#option-fail-on)
+    - [Option: allow\-only](#option-allow-only)
+  - [More Information](#more-information)
+- [Dockerfile](#dockerfile)
+- [About UnicodeEncodeError](#about-unicodeencodeerror)
+- [License](#license)
+  - [Dependencies](#dependencies)
+- [Uninstallation](#uninstallation)
+- [Contributing](#contributing)
 
 ## Description
 
@@ -131,10 +131,10 @@ To list license information from both metadata and classifier, use `--from=all`.
 
 **Note:** If neither can find license information, please check with the `with-authors` and `with-urls` options and contact the software author.
 
-* The `m` keyword is prepared as alias of `meta`.
-* The `c` keyword is prepared as alias of `classifier`.
-* The `mix` keyword is prepared as alias of `mixed`.
-    * Default behavior in this tool
+- The `m` keyword is prepared as alias of `meta`.
+- The `c` keyword is prepared as alias of `classifier`.
+- The `mix` keyword is prepared as alias of `mixed`.
+  - Default behavior in this tool
 
 #### Option: order
 
@@ -165,7 +165,7 @@ When executed with the `--format=markdown` option, you can output list in markdo
 When inserted in a markdown document, it is rendered as follows:
 
 | Name   | Version | License |
-|--------|---------|---------|
+| ------ | ------- | ------- |
 | Django | 2.0.2   | BSD     |
 | pytz   | 2017.3  | MIT     |
 
@@ -261,7 +261,6 @@ This makes pip-licenses a drop-in replacement for LicenseFinder.
     "version": "2017.3"
   }
 ]
-
 ```
 
 ##### CSV
@@ -347,6 +346,16 @@ Package names of arguments can be separated by spaces.
  Name        Version  License
  prettytable 3.5.0    BSD License
  pytz        2017.3   MIT
+ setuptools  38.5.0   UNKNOWN
+ wcwidth     0.2.5    MIT License
+```
+
+Packages can also be specified with a version, only ignoring that specific version.
+
+```bash
+(venv) $ pip-licenses --with-system --ignore-packages django pytz:2017.3
+ Name        Version  License
+ prettytable 3.5.0    BSD License
  setuptools  38.5.0   UNKNOWN
  wcwidth     0.2.5    MIT License
 ```
@@ -441,7 +450,6 @@ Some package data contains Unicode characters which might cause problems for cer
 
 If the input strings are filtered (see `--filter-strings`), you can specify the applied code page (default `latin-1`). A list of all available code pages can be found [codecs module document](https://docs.python.org/3/library/codecs.html#standard-encodings).
 
-
 ### Verify options
 
 #### Option: fail\-on
@@ -454,11 +462,13 @@ If `--from=all`, the option will apply to the metadata license field.
 ```bash
 (venv) $ pip-licenses --fail-on="MIT License;BSD License"
 ```
+
 **Note:** Packages with multiple licenses will fail if at least one license is included in the fail-on list. For example:
+
 ```
 # keyring library has 2 licenses
 $ pip-licenses --package keyring
- Name     Version  License                                         
+ Name     Version  License
  keyring  23.0.1   MIT License; Python Software Foundation License
 
 # If just "Python Software Foundation License" is specified, it will fail.
@@ -480,11 +490,13 @@ If `--from=all`, the option will apply to the metadata license field.
 ```bash
 (venv) $ pip-licenses --allow-only="MIT License;BSD License"
 ```
+
 **Note:** Packages with multiple licenses will only be allowed if at least one license is included in the allow-only list. For example:
+
 ```
 # keyring library has 2 licenses
 $ pip-licenses --package keyring
- Name     Version  License                                         
+ Name     Version  License
  keyring  23.0.1   MIT License; Python Software Foundation License
 
 # One or both licenses must be specified (order and case does not matter). Following checks will pass:
@@ -499,7 +511,6 @@ $ pip-licenses --package keyring  --allow-only="BSD License"
 $ echo $?
 1
 ```
-
 
 ### More Information
 
@@ -563,8 +574,8 @@ Often occurs in isolated environments such as Docker and tox.
 
 See useful reports:
 
-* [#35](https://github.com/raimon49/pip-licenses/issues/35)
-* [#45](https://github.com/raimon49/pip-licenses/issues/45)
+- [#35](https://github.com/raimon49/pip-licenses/issues/35)
+- [#45](https://github.com/raimon49/pip-licenses/issues/45)
 
 ## License
 
@@ -572,8 +583,8 @@ See useful reports:
 
 ### Dependencies
 
-* [prettytable](https://pypi.org/project/prettytable/) by Luke Maurits and maintainer of fork version Jazzband team under the BSD-3-Clause License
-    * **Note:** This package implicitly requires [wcwidth](https://pypi.org/project/wcwidth/).
+- [prettytable](https://pypi.org/project/prettytable/) by Luke Maurits and maintainer of fork version Jazzband team under the BSD-3-Clause License
+  - **Note:** This package implicitly requires [wcwidth](https://pypi.org/project/wcwidth/).
 
 `pip-licenses` has been implemented in the policy to minimize the dependence on external package.
 
